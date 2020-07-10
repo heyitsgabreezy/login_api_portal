@@ -23,14 +23,13 @@ class UserController extends Controller
             $success['token'] =  $user->createToken('MyApp')-> accessToken;
 
             //diri ibutang ang pag pasa ug id number sa app2
-            $response = Http::withToken($success['token'])->post('http://127.0.0.1:8001/',[
+            $response = Http::withToken($success['token'])->post('http://127.0.0.1:8001/api/set-student-id-number',[
                 'name' => $user->name,
-
             ]);
 
-            dd($response);
 
-            //return response()->json(['success' => $success], $this-> successStatus);
+
+            return response()->json(['success' => $response], $this-> successStatus);
         }
         else{
             return response()->json(['error'=>'Unauthorised'], 401);
